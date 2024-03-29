@@ -23,11 +23,11 @@ inputs:
   header-file:
     description: Filename for header content
     required: false
-    default: "Terraform Plan Changes"
+    default: "act-tmp-header.txt"
   footer-file:
     description: File name for footer content
     required: false
-    default: ""
+    default: "act-tmp-footer.txt"
   include-workflow-link:
     description: If true, include a link to the workflow in the comment
     required: false

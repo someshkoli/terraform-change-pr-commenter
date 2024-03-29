@@ -8,8 +8,8 @@ const myToken = core.getInput('github-token');
 const octokit = github.getOctokit(myToken);
 const context = github.context;
 const inputFilenames = core.getMultilineInput('json-file');
-const headerFilename = core.get('header-file');
-const footerFilename = core.getMultilineInput('footer-file');
+const headerFilename = core.getInput('header-file');
+const footerFilename = core.getInput('footer-file');
 const quietMode = core.getBooleanInput('quiet');
 const includeLinkToWorkflow = core.getBooleanInput('include-workflow-link');
 
