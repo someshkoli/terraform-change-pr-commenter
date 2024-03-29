@@ -20,12 +20,12 @@ inputs:
     description: If true, add the results of the plan to the workflow job summary
     required: false
     default: "false"
-  comment-header:
-    description: Header to use for the comment
+  header-file:
+    description: Filename for header content
     required: false
     default: "Terraform Plan Changes"
-  comment-footer:
-    description: Footer to use for the comment
+  footer-file:
+    description: File name for footer content
     required: false
     default: ""
   include-workflow-link:

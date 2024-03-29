@@ -8,8 +8,8 @@ const myToken = core.getInput('github-token');
 const octokit = github.getOctokit(myToken);
 const context = github.context;
 const inputFilenames = core.getMultilineInput('json-file');
-const commentHeader = core.getMultilineInput('comment-header');
-const commentFooter = core.getMultilineInput('comment-footer');
+const headerFilename = core.get('header-file');
+const footerFilename = core.getMultilineInput('footer-file');
 const quietMode = core.getBooleanInput('quiet');
 const includeLinkToWorkflow = core.getBooleanInput('include-workflow-link');
 
@@ -68,7 +68,7 @@ const output = () => {
                 // there will be formatting error when comment is 
                 // showed on GitHub
                 body += `
-${commentHeader}
+${fs.readFileSync(headerFilename)}
 <details ${expandDetailsComment ? "open" : ""}>
 <summary>
 <b>Terraform Plan: ${resources_to_create.length} to be created, ${resources_to_delete.length} to be deleted, ${resources_to_update.length} to be updated, ${resources_to_replace.length} to be replaced, ${resources_unchanged.length} unchanged.</b>
@@ -78,7 +78,7 @@ ${details("delete", resources_to_delete, "-")}
 ${details("update", resources_to_update, "!")}
 ${details("replace", resources_to_replace, "+")}
 </details>
-${commentFooter.map(a => a == '' ? '\n' : a).join('\n')}
+${fs.readFileSync(footerFilename)}
 ${workflowLink}
 `
                 if (resources_to_create + resources_to_delete + resources_to_update + resources_to_replace == []) {
